@@ -1,0 +1,9 @@
+{% extends "__object.twig" %}
+
+{% block objectContent %}
+{% set title = "Вулкан" %}
+    {% set image = "../public/images/volcano.jpg" %}
+    {% set description = "Описание вулкана..." %}
+    
+    {{ parent() }}
+{% endblock %}

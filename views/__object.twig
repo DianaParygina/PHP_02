@@ -1,18 +1,18 @@
 {% extends "__layout.twig" %}
 
 {% block content %}
-<div>
-    <a href="?mode=image">Картинка</a> | <a href="?mode=description">Описание</a>
+<h1>{{title}}</h1>
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <a class="nav-link {{ is_image ? 'active'}} " href="/{{title}}/image">Картинка</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link  {{ is_info ? 'active'}} " href="/{{title}}/info">Описание</a>
+    </li>
+</ul>
+
+<div class="container">
+    {% block objectContent %}{% endblock %}
 </div>
 
-<div>
-    {% if mode == 'image' %}
-        <img src="{{ image }}" alt="{{ title }}">
-    {% elseif mode == 'description' %}
-        <p> {{ description }}</p>
-    {% else %}
-        <img src="{{ image }}" alt="{{ title }}">
-        <p> {{ description }}</p>
-    {% endif %}
-</div>
 {% endblock %}

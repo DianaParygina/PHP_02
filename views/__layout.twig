@@ -29,16 +29,17 @@
                     <a class="nav-link active" aria-current="page" href="/">Главная</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/mermaid">Русалка</a>
+                    <a class="nav-link" href="/volcano">Вулкан</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/uranus">Уран</a>
+                    <a class="nav-link" href="/pompeii">Помпей</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
+<div class="container">
     <div> 
         {% for item in menu %}
             <a href="{{item.url}}" class="{{ title == item.title ? 'active' }}">{{item.title}}</a>
@@ -47,5 +48,6 @@
     {% block content %}
         пустота
     {% endblock %}
+</div>
 </body>
 </html>
