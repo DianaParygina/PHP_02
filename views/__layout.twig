@@ -40,13 +40,12 @@
 </nav>
 
 <div class="container">
-    <div> 
+    {% block content %}
+        <div> 
         {% for item in menu %}
             <a href="{{item.url}}" class="{{ title == item.title ? 'active' }}">{{item.title}}</a>
         {% endfor %}
     </div>
-    {% block content %}
-        пустота
     {% endblock %}
 </div>
 </body>

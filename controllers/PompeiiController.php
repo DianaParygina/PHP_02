@@ -2,7 +2,7 @@
 require_once "TwigBaseController.php"; // обязательно импортим BaseController
 
 class PompeiiController extends TwigBaseController {
-    public $title = "Помпеи"; // название страницы
+    public $title = "pompeii"; // название страницы
     public $template = "__object.twig"; // шаблон страницы
     protected \Twig\Environment $twig; // ссылка на экземпляр twig, для рендернига
     
@@ -11,8 +11,8 @@ class PompeiiController extends TwigBaseController {
         $context = parent::getContext(); // вызываем родительский метод
         
         $pompeii = [
-            'title' => 'Помпеи',
-            'image' => '../public/images/pompeii. jpg',
+            'title' => 'pompeii',
+            'image' => '../public/images/pompeii.jpg',
             'description' => 'Описание Помпей......'
         ];
 
