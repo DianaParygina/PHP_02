@@ -1,5 +1,5 @@
 <?php
-require_once "volcanoController.php";
+//require_once "volcanoController.php";
 
 class volcanoInfoController extends volcanoController {
     public $template = "volcano_info.twig";

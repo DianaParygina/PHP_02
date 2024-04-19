@@ -1,5 +1,5 @@
 <?php
-require_once "TwigBaseController.php"; // обязательно импортим BaseController
+//require_once "TwigBaseController.php"; // обязательно импортим BaseController
 
 class volcanoImageController extends volcanoController {
     public $template = "base_image.twig"; // шаблон страницы

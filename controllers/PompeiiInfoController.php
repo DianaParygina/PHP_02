@@ -1,5 +1,5 @@
 <?php
-require_once "PompeiiController.php";
+//require_once "PompeiiController.php";
 
 class PompeiiInfoController extends PompeiiController {
     public $template = "pompeii_info.twig";

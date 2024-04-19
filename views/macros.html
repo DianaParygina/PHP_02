@@ -1,0 +1,10 @@
+{# macros.html #}
+
+{% macro btn(text, url, active=false, btn_type=null) %}
+{% if active %}
+    {% set class = 'btn-primary' %}
+{% else %}
+    {% set class = 'btn-link' %}
+{% endif %}
+<a href="{{ url }}" class="btn {{ class }}">{{ text }}</a>
+{% endmacro %}
