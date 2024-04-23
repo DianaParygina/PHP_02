@@ -3,15 +3,16 @@
 {% from "macros.html" import btn %}
 
 {% block content %} 
+
 <h1>{{ title }}</h1>
 {{ description }}
 <ul class="nav nav-pills">
     {% set base_url = '/' ~ title %}
     <li class="nav-item">   
-        {{ btn("Картинка", base_url ~ "/image", _url == (base_url ~ "/image"), 'primary') }}        
+        <a class="nav-link" href="/space-object/{{ id }}/?showMode=image"> Картинка </a>
     </li>
     <li class="nav-item">
-        {{ btn("Описание", base_url ~ "/info", _url == (base_url ~ "/info"), 'primary') }}
+        <a class="nav-link" href="/space-object/{{ id }}/?showMode=info"> Описание </a>
     </li>
 </ul>
 
@@ -20,3 +21,4 @@
 </div>
 
 {% endblock %}
+

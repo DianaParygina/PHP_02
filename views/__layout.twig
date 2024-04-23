@@ -9,11 +9,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
     <title>{{ title }}</title> 
-    <style> 
-        a.active { 
-            background-color: yellow; 
-        } 
-    </style> 
 </head> 
 <body> 
 {% from "menu_items.html" import btn %}
@@ -24,14 +19,16 @@
             <span class="navbar-toggler-icon"></span> 
         </button> 
       <div class="collapse navbar-collapse" id="navbarNav"> 
-        <ul class="navbar-nav">
-            {{ btn("Главная", base_url ~ "/", _url == base_url ~ "/") }}
-        
-            {% set active_vulcano = _url == base_url ~ "/volcano" or _url starts with base_url ~ "/volcano/image" or _url starts with base_url ~ "/volcano/info" %}
-            {{ btn("Вулкан", base_url ~ "/volcano", active_vulcano) }}
-        
-            {% set active_pompeii = _url == base_url ~ "/pompeii" or _url starts with base_url ~ "/pompeii/image" or _url starts with base_url ~ "/pompeii/info" %}
-            {{ btn("Помпеи", base_url ~ "/pompeii", active_pompeii) }}
+        <ul class="navbar-nav">        
+            {{ btn("Главная", base_url ~ "/", _url == base_url ~ "/") }}    
+{% for type in types %}
+    <li class="nav-item">
+        <a class="nav-link" href="/?type={{ type.type }}">{{ type.type|title }}</a>
+    </li>
+{% endfor %}
+{# <li class="nav-item">
+  <a class="nav-link active" aria-current="page" href="/search">Поиск</a>
+</li> #}
         </ul>
 </div>
     </div> 

@@ -3,7 +3,7 @@ require_once "BaseController.php"; // обязательно импортим Ba
 
 class TwigBaseController extends BaseController {
     public $title = ""; // название страницы
-    public $template = ""; // шаблон страницы
+    public $template = "__object.twig"; // шаблон страницы
     protected \Twig\Environment $twig; // ссылка на экземпляр twig, для рендернига
 
     public function setTwig($twig) {
@@ -15,6 +15,7 @@ class TwigBaseController extends BaseController {
         $context = parent::getContext(); // вызываем родительский метод
         $context['title'] = $this->title; // добавляем title в контекст
         $context['_url'] = $_SERVER['REQUEST_URI'];
+    
         return $context;
     }
     
