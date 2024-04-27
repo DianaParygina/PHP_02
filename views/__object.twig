@@ -9,10 +9,10 @@
 <ul class="nav nav-pills">
     {% set base_url = '/' ~ title %}
     <li class="nav-item">   
-        <a class="nav-link" href="/space-object/{{ id }}/?showMode=image"> Картинка </a>
+        <a class="me-3" href="/space-object/{{ id }}/image">Картинка  </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/space-object/{{ id }}/?showMode=info"> Описание </a>
+        <a class="me-3" href="/space-object/{{ id }}/info">  Описание</a>
     </li>
 </ul>
 
@@ -21,4 +21,3 @@
 </div>
 
 {% endblock %}
-

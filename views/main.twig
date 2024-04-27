@@ -4,9 +4,25 @@
 <div class="row d-flex">
     {% for object in space_objects %}
         <div class="col mb-4 d-flex align-items-stretch">
-            <div class="border p-2 d-flex flex-column justify-content-between">
+            <div class="border p-2 d-flex flex-column justify-content-between position-relative">
+                <div class="position-absolute" style="right: 4px; top: 4px">
+                    <form action="/space-object/delete" method="POST">
+                        <input type="hidden" name="id" value="{{ object.id }}">
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </form>    
+                </div>     
+                <div class="position-absolute" style="right: 50px; top: 4px">
+                    <form action="/space-object/{{ object.id }}/edit" method="POST">
+                        <input type="hidden" name="id" value="{{ object.id }}">
+                        <button type="submit" class="btn btn-info">
+                            <i class="fas fa-pencil"></i>
+                        </button>
+                    </form>    
+                </div>       
                 <div class="img-thumbnail mb-2" style="width: 100%; height: 200px; overflow:hidden">
-                    <img src="{{ object.image }}" style="height: 100%; width: 100%; object-fit: cover;" alt="">
+                    <img src="{{ object.image }}" style="height: 100%; width: 100%; object-fit: cover;" alt="{{ object.title }}">
                 </div>
                 <div class="d-flex flex-column">
                     <a class="btn btn-primary mb-1" href="/space-object/{{ object.id }}">{{ object.title }}</a>

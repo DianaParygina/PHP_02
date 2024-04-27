@@ -8,15 +8,28 @@ abstract class BaseController {
         $this->pdo = $pdo;
         }
 
-    // добавил сеттер
     public function setParams(array $params) {
         $this->params = $params;
     }
 
-    // остальное не трогаем
     public function getContext(): array {
-        return [];
+        //$context = parent::getContext();
+        $query = $this->pdo->query("SELECT * FROM object_types"); 
+        $types = $query->fetchAll();
+        $context['types'] = $types;
+        return $context;
     }
 
-    abstract public function get();
+    public function process_response() {
+        $method = $_SERVER['REQUEST_METHOD']; // вытаскиваем метод
+        $context = $this->getContext();
+        if ($method == 'GET') { // если GET запрос то вызываем get
+            $this->get($context);
+        } else if ($method == 'POST') { // если POST запрос то вызываем get
+            $this->post($context);
+        }
+    }
+
+    public function get(array $context) {} 
+    public function post(array $context) {}
 }

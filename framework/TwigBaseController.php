@@ -10,6 +10,10 @@ class TwigBaseController extends BaseController {
         $this->twig = $twig;
     }
 
+    public function getTemplate(){
+        return $this->template;
+    }
+
     public function getContext() : array
     {
         $context = parent::getContext(); // вызываем родительский метод
@@ -19,7 +23,9 @@ class TwigBaseController extends BaseController {
         return $context;
     }
     
-   public function get() {
-        echo $this->twig->render($this->template, $this->getContext());
+    public function get(array $context) { // добавил аргумент в get
+        $template = $this->getTemplate();
+        // echo $this->twig->render($template, $this->getContext()); // а тут поменяем getContext на просто $context
+        echo $this->twig->render($template, $context);
     }
 }

@@ -5,22 +5,32 @@ class ObjectController extends BaseSpaceTwigController {
 
     public $template = "__object.twig";
 
+    public function getTemplate() {
+        $showMode = isset($this->params['showMode']) ? $this->params['showMode'] : 'default';
+        if ($showMode == 'image') {
+            return "base_image.twig";
+        } elseif ($showMode == 'info') {
+            return "base_info.twig";
+        }else {
+            return "__object.twig";
+        }
+    }
+
     public function getContext(): array
     {
         $context = parent::getContext();
+        $showMode = isset($this->params['showMode']) ? $this->params['showMode'] : 'default';
 
         $query = $this->pdo->prepare("SELECT * FROM space_objects WHERE id = :my_id");
         $query->bindValue("my_id", $this->params['id']);
         $query->execute();
         $data = $query->fetch();
 
-        $showMode = isset($this->params['showMode']) ? $this->params['showMode'] : 'default';
-
-        if (isset($_GET['showMode'])) {
-            if($_GET['showMode'] === 'image'){
+        if ($showMode) {
+            if($showMode === 'image'){
                 $query = $this->pdo->prepare("SELECT image FROM space_objects WHERE id = :my_id");
                 $query->bindValue("my_id", $this->params['id']);
-            } elseif ($_GET['showMode'] === 'info') {
+            } elseif ($showMode === 'info') {
                 $query = $this->pdo->prepare("SELECT info FROM space_objects WHERE id = :my_id");
                 $query->bindValue("my_id", $this->params['id']);
             } else {
@@ -41,14 +51,6 @@ class ObjectController extends BaseSpaceTwigController {
         $context['image'] = $data['image'];
         $context['info'] = $data['info'];
 
-        // if($context['image']){
-            
-        // }
-
-        echo "<pre>"; // чтобы красивее выводил
-        print_r($context['image']); // выведем содержимое $_GET
-        echo "</pre>";
-        
         return $context;
 
         if (!$data) {
