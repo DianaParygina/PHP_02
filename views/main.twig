@@ -14,7 +14,7 @@
                     </form>    
                 </div>     
                 <div class="position-absolute" style="right: 50px; top: 4px">
-                    <form action="/space-object/{{ object.id }}/edit" method="POST">
+                    <form action="/space-object/{{ object.id }}/edit" method="GET">
                         <input type="hidden" name="id" value="{{ object.id }}">
                         <button type="submit" class="btn btn-info">
                             <i class="fas fa-pencil"></i>

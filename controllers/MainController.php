@@ -4,7 +4,7 @@ require_once "BaseSpaceTwigController.php";
 class MainController extends BaseSpaceTwigController {
     public $template = "main.twig";
     public $title = "Главная";
-
+    
     public function getContext(): array
     {
         $context = parent::getContext();

@@ -26,8 +26,18 @@ class ObjectController extends BaseSpaceTwigController {
         $query->execute();
         $data = $query->fetch();
 
+        if ($data) {
+            $context['description'] = $data['description'];
+            $context['image'] = $data['image'];
+            $context['info'] = $data['info'];
+        } else {
+            $context['description'] = ""; 
+            $context['image'] = "";
+            $context['info'] = "";
+        }
+
         if ($showMode) {
-            if($showMode === 'image'){
+            if ($showMode === 'image') {
                 $query = $this->pdo->prepare("SELECT image FROM space_objects WHERE id = :my_id");
                 $query->bindValue("my_id", $this->params['id']);
             } elseif ($showMode === 'info') {
@@ -36,27 +46,14 @@ class ObjectController extends BaseSpaceTwigController {
             } else {
                 $query = $this->pdo->query("SELECT * FROM space_objects");
             }
-    
-            }
-            
+            $query->execute();
+        }
 
-        $query->execute();
-        $context['objects'] = $query->fetchAll(); 
-
+        $context['objects'] = $query->fetchAll();
         $context['showMode'] = $showMode;
-
         $context['id'] = $this->params['id'];
-        $context['description'] = $data['description'];
-
-        $context['image'] = $data['image'];
-        $context['info'] = $data['info'];
 
         return $context;
-
-        if (!$data) {
-            header("Location: /404");
-            exit();
-        }
     }
 }
 
