@@ -26,18 +26,15 @@ EOL;
     }
 
     public function post(array $context) {
-        // Use isset() to check if keys exist before accessing them
         $title = isset($_POST['title']) ? $_POST['title'] : "";
         $description = isset($_POST['description']) ? $_POST['description'] : "";
         $type = isset($_POST['type']) ? $_POST['type'] : "";
         $info = isset($_POST['info']) ? $_POST['info'] : "";
         $id = $this->params['id'];
 
-        // Handle file upload
         $image_url = "";
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $tmp_name = $_FILES['image']['tmp_name'];
-            // Generate a unique and safe file name
             $fileExtension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
             $fileName = uniqid() . '.' . $fileExtension; 
             $filePath = "../public/media/$fileName";
@@ -62,7 +59,7 @@ EOL;
         $query->execute();
 
         $context['message'] = 'Вы успешно обновили объект';
-        $context['id'] = $this->params['id']; // получаем id нового добавленного объекта
+        $context['id'] = $this->params['id']; // получаем id текущее
 
         $this->get($context);
     }
