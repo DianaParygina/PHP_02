@@ -1,23 +1,44 @@
-{% extends "__layout.twig" %} 
-
-{% from "macros.html" import btn %}
-
-{% block content %} 
-
-<h1>{{ title }}</h1>
-{{ description }}
-<ul class="nav nav-pills">
-    {% set base_url = '/' ~ title %}
-    <li class="nav-item">   
-        <a class="me-3" href="/space-object/{{ id }}/image">Картинка  </a>
-    </li>
-    <li class="nav-item">
-        <a class="me-3" href="/space-object/{{ id }}/info">  Описание</a>
-    </li>
-</ul>
-
+{% extends "__layout.twig" %}
+{% block content %}
+Сообщение из сессии: {{my_session_message}}
+<br>
+{# Последние сообщения:<br>
+{% for m in messages %}
+    {{m}}<br>
+{% endfor %}
+<hr> #}
 <div class="container">
-    {% block objectContent %}{% endblock %}
+    <div class="row">
+        <div class="col-md-9">
+            <h1>{{ title }}</h1>
+            {{ description }}
+            <ul class="nav nav-pills">
+                {% set base_url = '/' ~ title %}
+                <li class="nav-item">
+                    <a class="me-3" href="/space-object/{{ id }}/image">Картинка</a>
+                </li>
+                <li class="nav-item">
+                    <a class="me-3" href="/space-object/{{ id }}/info">Описание</a>
+                </li>
+            </ul>
+            <div class="container">
+                {% block objectContent %}{% endblock %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="mb-3">
+                <strong>Последние страницы, которые вы посетили:</strong>
+                <ul class="list-group">
+                    {% for url in page_history %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ url }}
+                        </li>
+                    {% else %}
+                        <li class="list-group-item">Нет истории посещений</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
-
 {% endblock %}

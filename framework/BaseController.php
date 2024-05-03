@@ -21,6 +21,16 @@ abstract class BaseController {
     }
 
     public function process_response() {
+        session_set_cookie_params(60*60*10);
+        session_start();
+
+        if (!isset($_SESSION['page_history'])) {
+            $_SESSION['page_history'] = [];
+        }
+        $currentUrl = $_SERVER['REQUEST_URI'];
+        array_unshift($_SESSION['page_history'], $currentUrl);
+        $_SESSION['page_history'] = array_slice($_SESSION['page_history'], 0, 10); 
+
         $method = $_SERVER['REQUEST_METHOD']; // вытаскиваем метод
         $context = $this->getContext();
         if ($method == 'GET') { // если GET запрос то вызываем get

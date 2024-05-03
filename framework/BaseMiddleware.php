@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 
 abstract class BaseMiddleware {
     public PDO $pdo;
@@ -10,4 +10,4 @@ abstract class BaseMiddleware {
     public function apply(BaseController $controller, array $context) {
         $query = $this->pdo->query("SELECT * FROM users WHERE username = :username"); 
     }
-} -->
+}

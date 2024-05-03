@@ -1,28 +1,25 @@
-<!-- <?php
+<?php
 
-class LoginRequiredMiddleware extends BaseMiddleware{
+class LoginRequiredMiddleware extends BaseMiddleware {
 
-    public function apply(BaseController $controller, array $context){
+    public function apply(BaseController $controller, array $context) {
 
-        $username = isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '';
-        $password = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW'] : '';
+        $username = $_SERVER['PHP_AUTH_USER'] ?? '';
+        $password = $_SERVER['PHP_AUTH_PW'] ?? '';
 
         // Получаем PDO соединение из контроллера
-        $pdo = $controller->pdo;
+        $query = $controller->pdo->prepare("SELECT * FROM users WHERE username = :username AND password = :password");
 
-        $query = $pdo->prepare('SELECT * FROM users WHERE username = :username');
-        $query->execute(['username' => $username]);
-        $user = $query->fetch();
 
-        if (!$user || !password_verify($password, $user['password'])) {
+        $query->bindParam(":username", $username, PDO::PARAM_STR);
+        $query->bindParam(":password", $password, PDO::PARAM_STR);
+
+        $query->execute();
+        $user = $query->fetch(PDO::FETCH_ASSOC);
+        if (!$user) {
             header('WWW-Authenticate: Basic realm="Space objects"');
             http_response_code(401);
             exit;
-        }else {
-            $_SESSION['logged_in'] = true;
-            $_SESSION['username'] = $username;
-            header('Location: /');
-            exit;
         }
     }
-} -->
+}

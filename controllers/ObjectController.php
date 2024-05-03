@@ -48,10 +48,13 @@ class ObjectController extends BaseSpaceTwigController {
             }
             $query->execute();
         }
-
+        
         $context['objects'] = $query->fetchAll();
         $context['showMode'] = $showMode;
         $context['id'] = $this->params['id'];
+        $context["my_session_message"] = isset($_SESSION['welcome_message']) ? $_SESSION['welcome_message'] : "";
+        $context["messages"] = isset($_SESSION['messages']) ? $_SESSION['messages'] : "";
+        $context["page_history"] = isset($_SESSION['page_history']) ? $_SESSION['page_history'] : "";
 
         return $context;
     }
